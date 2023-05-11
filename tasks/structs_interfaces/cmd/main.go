@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ansakharov/mini_course_code/tasks/slices_interfaces/src"
+	"github.com/ansakharov/mini_course_code/tasks/structs_interfaces/src"
 )
 
 func main() {
