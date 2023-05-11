@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	content := "This is a Sample Text to be read by the CountingReaderImplementation."
+	content := "This is a Sample Text to be read by the CountingToLowerReaderImpl."
 	reader := bytes.NewReader([]byte(content))
 	countingReader := src.NewCountingReader(reader)
 

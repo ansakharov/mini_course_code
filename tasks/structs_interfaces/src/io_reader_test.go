@@ -53,7 +53,7 @@ func TestCountingReader_Read(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			cr := &CountingReaderImplementation{
+			cr := &CountingToLowerReaderImpl{
 				Reader:         tt.fields.reader,
 				TotalBytesRead: tt.fields.bytesRead,
 			}
@@ -77,7 +77,7 @@ func TestCountingReader_Read(t *testing.T) {
 
 func TestReadAll(t *testing.T) {
 	type args struct {
-		cr      *CountingReaderImplementation
+		cr      *CountingToLowerReaderImpl
 		bufSize int
 	}
 	tests := []struct {

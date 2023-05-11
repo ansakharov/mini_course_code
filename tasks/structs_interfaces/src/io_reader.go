@@ -10,17 +10,17 @@ type Reader interface {
 	BytesRead() int64
 }
 
-type CountingReaderImplementation struct {
+type CountingToLowerReaderImpl struct {
 	Reader         io.Reader
 	TotalBytesRead int64
 }
 
-func (cr *CountingReaderImplementation) Read(p []byte) (int, error) {
+func (cr *CountingToLowerReaderImpl) Read(p []byte) (int, error) {
 	return 0, nil
 }
 
-func NewCountingReader(r io.Reader) *CountingReaderImplementation {
-	return &CountingReaderImplementation{
+func NewCountingReader(r io.Reader) *CountingToLowerReaderImpl {
+	return &CountingToLowerReaderImpl{
 		Reader: r,
 	}
 }
