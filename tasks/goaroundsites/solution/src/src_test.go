@@ -75,12 +75,6 @@ func TestMonitor_Run(t *testing.T) {
 					continue
 				}
 
-				/*
-					if status.StatusCode != http.StatusOK {
-						t.Errorf("Expected status 200 for site %s, but got %d", site, status.StatusCode)
-					}
-				*/
-
 				if status.StatusCode == 0 {
 					t.Errorf("Expected valid status  for site %s, but got %d", site, status.StatusCode)
 				}
