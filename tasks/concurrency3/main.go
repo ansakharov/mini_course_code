@@ -30,6 +30,7 @@ func main() {
 	for i := 0; i < max; i++ {
 		inCh <- i
 	}
+	close(inCh)
 
 	resSlice := make([]int, 0)
 	for res := range outCh {
