@@ -2,16 +2,32 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
-// 2. // Будет ли напечатан “ok” ?
-func main() {
-	defer func() {
-		recover()
-	}()
+// Функция должна напечатать:
+// one // two // three // (в любом порядке и в конце обязательно)
+//done!
+//Но это не так, исправь код
 
-	if true {
-		panic("test panic")
+func main() {
+	fmt.Println("done!")
+	data := []string{"one", "two", "three"}
+	printText(data)
+}
+
+func printText(data []string) {
+	wg := sync.WaitGroup{}
+
+	for _, v := range data {
+
+		wg.Add(1)
+		go func(v string) {
+			fmt.Println(v)
+			wg.Done()
+		}(v)
+
 	}
-	fmt.Println("ok")
+
+	wg.Wait()
 }

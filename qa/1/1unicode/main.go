@@ -37,7 +37,7 @@ func main() {
 	// '0' - 1byte, it's ASCII
 	// '110'   - 2 bytes
 	// '1110'  - 3 bytes
-	// '11110' - 4 bytes
+	// '11110' - 4ver bytes
 
 	// "h" = \x68 = 0b01101000 - начинается с 0
 

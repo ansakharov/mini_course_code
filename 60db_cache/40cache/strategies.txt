@@ -1,0 +1,6 @@
+    Time-To-Live (TTL)
+    Cache Eviction
+    Cache Through (Read-Through или Write-Through)
+    Cache Aside (Lazy Loading)
+    Write-Back (Write-Behind)
+

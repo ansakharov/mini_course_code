@@ -17,7 +17,16 @@ type ringBuffer struct {
 }
 
 func (r *ringBuffer) Run() {
+	for value := range r.inCh {
+		select {
+		case r.outCh <- value:
+		default:
+			<-r.outCh
+			r.outCh <- value
+		}
+	}
 
+	close(r.outCh)
 }
 
 func main() {

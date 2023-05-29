@@ -3,26 +3,28 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
-// Функция должна напечатать:
-// one // two // three // (в любом порядке и в конце обязательно)
-//done!
-//Но это не так, исправь код
+// Мы пытаемся подсчитать количество выполненных параллельно операций,
+//что может пойти не так?
+
+var callCounter uint64
 
 func main() {
-	fmt.Println("done!")
-	data := []string{"one", "two", "three"}
-	printText(data)
-}
-
-func printText(data []string) {
-	wg := sync.WaitGroup{}
-	for _, v := range data {
-		go func(v string) {
-			wg.Add(1)
-			fmt.Println(v)
-			wg.Done()
-		}(v)
+	group := sync.WaitGroup{}
+	for i := 0; i < 10000; i++ {
+		group.Add(1)
+		go func() {
+			defer group.Done()
+			// Ходим в базу, делаем долгую работу
+			//time.Sleep(time.Second)
+			//Увеличиваем счетчик
+			atomic.AddUint64(&callCounter, 1)
+			//callCounter++
+		}()
 	}
+
+	group.Wait()
+	fmt.Println("Call counter value = ", callCounter)
 }

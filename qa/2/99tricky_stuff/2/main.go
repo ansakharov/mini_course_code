@@ -4,23 +4,14 @@ import (
 	"fmt"
 )
 
-//Пример для разбора
-// 1. // Что выведет код и почему?
-
-func setLinkHome(link *string) {
-	*link = "http://home"
-
-	/*
-		str := "http://home"
-		link = &str
-	*/
-}
-
+// 2. // Будет ли напечатан “ok” ?
 func main() {
+	defer func() {
+		recover()
+	}()
 
-	link := "http://other"
-	fmt.Println(link)
-
-	setLinkHome(&link)
-	fmt.Println(link)
+	if true {
+		panic("test panic")
+	}
+	fmt.Println("ok")
 }

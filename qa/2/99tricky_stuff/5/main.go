@@ -1,23 +1,20 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"context"
+	"io"
 )
 
-// Мы пытаемся подсчитать количество выполненных параллельно операций,
-//что может пойти не так?
-
-var callCounter uint
-
-func main() {
-	for i := 0; i < 10000; i++ {
-		go func() {
-			// Ходим в базу, делаем долгую работу
-			time.Sleep(time.Second)
-			//Увеличиваем счетчик
-			callCounter++
-		}()
+//Пример для разбора // 5. // Есть функция processDataInternal, которая может выполняться неопределенно долго.
+//Чтобы контролировать процесс, мы добавили таймаут выполнения ф-ии через context.
+//Какие недостатки кода ниже?
+func (s *Service) ProcessData(timeoutCtx context.Context, r io.Reader) error {
+	errCh := make(chan error)
+	go func() { errCh <- s.processDataInternal(r) }()
+	select {
+	case err := <-errCh:
+		return err
+	case <-timeoutCtx.Done():
+		return timeoutCtx.Err()
 	}
-	fmt.Println("Call counter value = ", callCounter)
 }
